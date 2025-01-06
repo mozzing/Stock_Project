@@ -169,7 +169,7 @@
 								<div class="row align-items-center">
 									<div class="col">
 <h4 class="card-title">종목 게시판</h4>
-<input type="button" value="글쓰기">
+<input type="button" value="  글쓰기  " id="insertFormBtn">
 									</div>
 									<!--end col-->
 								</div>
@@ -179,23 +179,25 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col-12 col-md mb-2 mb-lg-0">
-<c:if test="${not empty boardList}">
+<c:if test="${not empty MY_KEY_BLIST}">  
     <table border="1" class="col-lg-12">
         <thead>
             <tr>
-                <th>BSEQ</th>
-                <th>Title</th>
-                <th>Contents</th>
-                <th>Board Date</th>
-                <th>USEQ</th>
+                <th>글번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성일</th>
+                <th>작성자</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="board" items="${boardList}">
+        	
+        	
+            <c:forEach var="board" items="${MY_KEY_BLIST}">
             	<tr>
             		<td>${board.bseq}</td>
-            		<td>${board.title}</td>
-            		<td>${board.boardcontents}</td>
+            		<td><a href="/boardpage?bseq=${board.bseq}&pageGubun=T001">${board.title}</a></td>
+            		<td><a href="/boardpage?bseq=${board.bseq}&pageGubun=TR001">${board.title}</a></td>
             		<td>${board.boarddate}</td>
             		<td>${board.useq}</td>
             	</tr>
@@ -203,9 +205,14 @@
         </tbody>
     </table>
 </c:if>
-<c:if test="${empty boardList}">
+<c:if test="${empty MY_KEY_BLIST}">
     <p>게시물이 없습니다.</p>
 </c:if>
+<br>
+
+${MY_KEY_PAGING_HTML}
+<br>
+
 									</div>
 									<!--end col-->
 								</div>
@@ -310,8 +317,15 @@
 	<script
 		src="/${pageContext.request.contextPath}/assets/js/pages/crypto-index.init.js"></script>
 	<!-- App js 
-<script src="/${pageContext.request.contextPath}/assets/js/app.js"></script> -->
-
+	<script src="/${pageContext.request.contextPath}/assets/js/app.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+	$( document ).ready(function() {
+		$("#insertFormBtn").click( function() {  
+	    	location.href = "/boardpage.jsp";
+	    } );
+	});
+</script>  
 </body>
 <!--end body-->
 
